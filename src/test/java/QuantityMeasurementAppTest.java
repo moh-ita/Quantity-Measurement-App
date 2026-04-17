@@ -16,6 +16,9 @@ public class QuantityMeasurementAppTest {
         testGenericQuantityNotEqualAcrossUnits();
         testGenericQuantityRejectsNullUnit();
         testGenericQuantityRejectsNullQuantityCompare();
+        testYardAndFeetEquality();
+        testCentimeterAndInchEquality();
+        testYardAndCentimeterInequality();
 
         if (failed > 0) {
             throw new AssertionError("Tests failed: " + failed + ", passed: " + passed);
@@ -81,6 +84,30 @@ public class QuantityMeasurementAppTest {
                 new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
         assertThrows(() -> QuantityMeasurementApp.areEqual(oneFoot, null), "Null quantity compare must be rejected");
     }
+
+        private static void testYardAndFeetEquality() {
+        QuantityMeasurementApp.QuantityLength oneYard =
+            new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.YARDS);
+        QuantityMeasurementApp.QuantityLength threeFeet =
+            new QuantityMeasurementApp.QuantityLength(3.0, QuantityMeasurementApp.LengthUnit.FEET);
+        assertTrue(QuantityMeasurementApp.areEqual(oneYard, threeFeet), "1yd should equal 3ft");
+        }
+
+        private static void testCentimeterAndInchEquality() {
+        QuantityMeasurementApp.QuantityLength oneInch =
+            new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.INCHES);
+        QuantityMeasurementApp.QuantityLength twoPointFiveFourCm =
+            new QuantityMeasurementApp.QuantityLength(2.54, QuantityMeasurementApp.LengthUnit.CENTIMETERS);
+        assertTrue(QuantityMeasurementApp.areEqual(oneInch, twoPointFiveFourCm), "1in should equal 2.54cm");
+        }
+
+        private static void testYardAndCentimeterInequality() {
+        QuantityMeasurementApp.QuantityLength oneYard =
+            new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.YARDS);
+        QuantityMeasurementApp.QuantityLength tenCm =
+            new QuantityMeasurementApp.QuantityLength(10.0, QuantityMeasurementApp.LengthUnit.CENTIMETERS);
+        assertFalse(QuantityMeasurementApp.areEqual(oneYard, tenCm), "1yd should not equal 10cm");
+        }
 
     private static void assertTrue(boolean condition, String message) {
         if (!condition) {
