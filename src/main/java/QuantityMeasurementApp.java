@@ -1,6 +1,6 @@
 public class QuantityMeasurementApp {
 
-    private static final double EPSILON = 1e-9;
+    private static final double EPSILON = 1e-4;
 
     public static boolean areEqualInFeet(double firstFeet, double secondFeet) {
         return areEqual(new QuantityLength(firstFeet, LengthUnit.FEET), new QuantityLength(secondFeet, LengthUnit.FEET));
@@ -43,7 +43,9 @@ public class QuantityMeasurementApp {
 
     public enum LengthUnit {
         FEET(12.0),
-        INCHES(1.0);
+        INCHES(1.0),
+        YARDS(36.0),
+        CENTIMETERS(0.393701);
 
         private final double inchesFactor;
 
