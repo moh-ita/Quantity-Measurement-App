@@ -12,6 +12,10 @@ public class QuantityMeasurementAppTest {
         testInchesEqualWhenSame();
         testInchesNotEqualWhenDifferent();
         testInchesRejectsNaN();
+        testGenericQuantityEqualAcrossUnits();
+        testGenericQuantityNotEqualAcrossUnits();
+        testGenericQuantityRejectsNullUnit();
+        testGenericQuantityRejectsNullQuantityCompare();
 
         if (failed > 0) {
             throw new AssertionError("Tests failed: " + failed + ", passed: " + passed);
@@ -50,6 +54,32 @@ public class QuantityMeasurementAppTest {
 
     private static void testInchesRejectsNaN() {
         assertThrows(() -> QuantityMeasurementApp.areEqualInInches(Double.NaN, 5.0), "NaN inches must be rejected");
+    }
+
+    private static void testGenericQuantityEqualAcrossUnits() {
+        QuantityMeasurementApp.QuantityLength oneFoot =
+                new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength twelveInches =
+                new QuantityMeasurementApp.QuantityLength(12.0, QuantityMeasurementApp.LengthUnit.INCHES);
+        assertTrue(QuantityMeasurementApp.areEqual(oneFoot, twelveInches), "1ft should equal 12in");
+    }
+
+    private static void testGenericQuantityNotEqualAcrossUnits() {
+        QuantityMeasurementApp.QuantityLength oneFoot =
+                new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
+        QuantityMeasurementApp.QuantityLength elevenInches =
+                new QuantityMeasurementApp.QuantityLength(11.0, QuantityMeasurementApp.LengthUnit.INCHES);
+        assertFalse(QuantityMeasurementApp.areEqual(oneFoot, elevenInches), "1ft should not equal 11in");
+    }
+
+    private static void testGenericQuantityRejectsNullUnit() {
+        assertThrows(() -> new QuantityMeasurementApp.QuantityLength(1.0, null), "Null unit must be rejected");
+    }
+
+    private static void testGenericQuantityRejectsNullQuantityCompare() {
+        QuantityMeasurementApp.QuantityLength oneFoot =
+                new QuantityMeasurementApp.QuantityLength(1.0, QuantityMeasurementApp.LengthUnit.FEET);
+        assertThrows(() -> QuantityMeasurementApp.areEqual(oneFoot, null), "Null quantity compare must be rejected");
     }
 
     private static void assertTrue(boolean condition, String message) {
