@@ -9,6 +9,9 @@ public class QuantityMeasurementAppTest {
         testFeetEqualWithZero();
         testFeetRejectsNaN();
         testFeetRejectsInfinity();
+        testInchesEqualWhenSame();
+        testInchesNotEqualWhenDifferent();
+        testInchesRejectsNaN();
 
         if (failed > 0) {
             throw new AssertionError("Tests failed: " + failed + ", passed: " + passed);
@@ -35,6 +38,18 @@ public class QuantityMeasurementAppTest {
 
     private static void testFeetRejectsInfinity() {
         assertThrows(() -> QuantityMeasurementApp.areEqualInFeet(Double.POSITIVE_INFINITY, 5.0), "Infinity must be rejected");
+    }
+
+    private static void testInchesEqualWhenSame() {
+        assertTrue(QuantityMeasurementApp.areEqualInInches(12.0, 12.0), "12in should equal 12in");
+    }
+
+    private static void testInchesNotEqualWhenDifferent() {
+        assertFalse(QuantityMeasurementApp.areEqualInInches(12.0, 11.0), "12in should not equal 11in");
+    }
+
+    private static void testInchesRejectsNaN() {
+        assertThrows(() -> QuantityMeasurementApp.areEqualInInches(Double.NaN, 5.0), "NaN inches must be rejected");
     }
 
     private static void assertTrue(boolean condition, String message) {
