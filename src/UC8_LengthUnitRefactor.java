@@ -1,5 +1,5 @@
-public final class UC12_LengthUnitRefactor {
-    private UC12_LengthUnitRefactor() {
+public final class UC8_LengthUnitRefactor {
+    private UC8_LengthUnitRefactor() {
     }
 
     public static double convertToBaseUnit(double value, LengthUnit unit) {
