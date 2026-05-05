@@ -1,5 +1,5 @@
-public final class UC6_LengthAddition {
-    private UC6_LengthAddition() {
+public final class UC10_LengthAddition {
+    private UC10_LengthAddition() {
     }
 
     public static QuantityLength add(QuantityLength first, QuantityLength second) {
