@@ -1,5 +1,5 @@
-public final class UC13_WeightMeasurement {
-    private UC13_WeightMeasurement() {
+public final class UC9_WeightMeasurement {
+    private UC9_WeightMeasurement() {
     }
 
     public static double convert(double value, WeightUnit sourceUnit, WeightUnit targetUnit) {

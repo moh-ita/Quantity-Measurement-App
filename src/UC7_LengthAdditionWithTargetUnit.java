@@ -1,5 +1,5 @@
-public final class UC11_LengthAdditionWithTargetUnit {
-    private UC11_LengthAdditionWithTargetUnit() {
+public final class UC7_LengthAdditionWithTargetUnit {
+    private UC7_LengthAdditionWithTargetUnit() {
     }
 
     public static QuantityLength add(QuantityLength first, QuantityLength second, LengthUnit targetUnit) {
